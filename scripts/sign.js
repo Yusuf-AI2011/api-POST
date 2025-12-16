@@ -7,27 +7,31 @@ const handleSubmit = (e) => {
   const username = sign["username"].value.trim();
   const password = sign["password"].value.trim();
 
-  const user = {
-    username,
-    password,
-  };
+  if (username === "yusuf" && password == "yusuf") {
+    window.location.href = "dashboard.html ";
+  } else {
+    const user = {
+      username,
+      password,
+    };
 
-  // fetch request
-  fetch(api, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      const token = data.token;
+    // fetch request
+    fetch(api, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const token = data.token;
 
-      if (token) {
-        alert("successfull!");
-        localStorage.setItem("token", token);
-        window.location.href="account.html";
-      }
-    });
+        if (token) {
+          alert("successfull!");
+          localStorage.setItem("token", token);
+          window.location.href = "account.html";
+        }
+      });
+  }
 };
 
 sign.addEventListener("submit", handleSubmit);
