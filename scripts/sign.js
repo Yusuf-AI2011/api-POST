@@ -28,7 +28,7 @@ const handleSubmit = (e) => {
         if (token) {
           alert("successfull!");
           localStorage.setItem("token", token);
-          window.location.href = "account.html";
+          window.location.href = "dashboard.html";
         }
       });
   }
