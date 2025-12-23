@@ -1,75 +1,114 @@
 .an {
   width: 100%;
-  height: 90vh;
-  padding: 0px 10px 20px 10px;
-  overflow: auto;
-  display: none;
 
   &__table {
     width: 100%;
-    margin: auto;
+    padding: 0px;
+    border-collapse: collapse;
   }
 
   &__table-head {
-    position: fixed;
-    padding: 0px 0px 0px 10px;
-    margin-left: -12px;
-    margin-top: -2px;
-    height: 40px;
-    background-color: rgba(255, 0, 0, 1);
-    // border: 5px solid #202020;
+    position: sticky;
+    top: 10vh;
+    width: 100%;
+    height: 50px;
+    background-color: red;
+    // border-bottom: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
   }
 
   &__table-body {
     width: 100%;
+    // height: 200vh;
+    padding: 20px 0px;
+    // background-color: blue;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     flex-direction: column;
     gap: 50px;
+    color: #ffffff;
   }
 
   &__table-row {
-    width: 100%;
-    padding: 10px 0px 10px 0px;
-    border-radius: 10px;
+    width: 95%;
+    padding: 20px 0px;
+    margin: auto;
     display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 100px;
+    justify-content: space-between;
+    align-content: center;
     border-bottom: 3px solid red;
     border-top: 3px solid white;
+    border-radius: 10px;
   }
 
   &__table-headRow {
-    border: hidden;
+    border: none;
   }
 
   &__table-height {
-    width: 150px;
-    color: #ffffff;
+    width: 200px;
+    // border: 1px solid #000;
     display: flex;
-    justify-content: start;
+    justify-content: center;
+    align-items: center;
+    // text-align: center;
+  }
+
+  &__table-description {
+    width: 200px;
+    height: 100px;
+    // border: 1px solid #000;
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
 
   &__image {
     width: 100px;
     height: 100px;
-    // border: 3px solid red;
+    padding: 10px;
+    border: 3px solid red;
+    background-color: #ffffff;
+    border-radius: 5px;
   }
 
-  &__table-description {
-    width: 147px;
-    height: 100px;
-    color: #ffffff;
-    text-align: start;
-    font-size: 15px;
+  &__table-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__table-button {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+  }
+
+  &__table-id {
     display: flex;
     justify-content: start;
     align-items: center;
-    overflow: hidden;
-    // border: 1px solid red;
+  }
+
+  &__table-delete {
+    background-color: red;
+    color: white;
+  }
+
+  &__table-edit {
+    background-color: #ffffff;
+    color: red;
   }
 }
 
@@ -83,6 +122,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  display: none;
   gap: 100px;
   &__part1 {
     width: 80%;
@@ -246,10 +286,6 @@
     color: red;
   }
 
-  &__table-row {
-    width: 100%;
-  }
-
   &__table-description {
     width: 50%;
     height: 50px;
@@ -259,3 +295,85 @@
     font-weight: 900;
   }
 }
+
+.add {
+  width: 300px;
+  height: 270px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #202020;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  &-form {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &-input {
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    font-weight: 900;
+    outline: none;
+    border: 2px solid red;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: red;
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &-button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 900;
+    // border: none;
+  }
+
+  &-submit {
+    color: #ffffff;
+    background-color: green;
+    font-weight: 900;
+  }
+
+  &-cancel {
+    background-color: red;
+  }
+
+  &-closer {
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: #ffffff;
+
+  }
+}
+
+::placeholder {
+  color: #202020;
+}
+
+.none {
+    display: none;
+  }

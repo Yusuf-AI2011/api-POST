@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/normolize.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
   </head>
   <body>
     <header class="head">
@@ -27,6 +32,7 @@
           <h1 class="head__name">User</h1>
         </article>
       </section>
+
       <section class="head__center">
         <article class="head__cards">
           <button class="head__card">Home</button>
@@ -47,22 +53,56 @@
       <nav class="nav">
         <h1 class="main__title">Dashboard</h1>
       </nav>
+
+      <!-- table -->
       <div class="an__wrapper an">
         <table class="an__table">
           <thead class="an__table-head">
             <tr class="an__table-row an__table-headRow">
-              <th class="an__table-height">T/R</th>
+              <th class="an__table-height an__table-id">ID</th>
               <th class="an__table-height">Title</th>
               <th class="an__table-height">Category</th>
-              <th class="an__table-height">Description</th>
               <th class="an__table-height">Price</th>
               <th class="an__table-height">Image</th>
               <th class="an__table-height">Action</th>
             </tr>
           </thead>
-          <tbody class="an__table-body">
-            <tr class="an__table-row"></tr>
-          </tbody>
+          <!-- ADD PRODUCTS -->
+          <section class="add-product add none">
+            <form class="add-form">
+              <input
+                class="add-input"
+                type="text"
+                placeholder="title"
+                name="title"
+              />
+              <input
+                class="add-input"
+                type="text"
+                placeholder="category"
+                name="category"
+              />
+              <input
+                class="add-input"
+                type="number"
+                placeholder="price"
+                name="price"
+              />
+              <input
+                class="add-input"
+                type="url"
+                placeholder="image"
+                name="image"
+              />
+            </form>
+            <div class="add-buttons">
+              <button class="add-button add-submit">Submit</button>
+              <button class="add-button add-cancel">Cancel</button>
+            </div>
+          </section>
+          <button class="add-closer">+</button>
+          <!-- THE END OF ADDING PART -->
+          <tbody class="an__table-body"></tbody>
         </table>
       </div>
       <div class="products__wrapper pro">
@@ -294,5 +334,9 @@
       </div>
     </main>
     <script src="scripts/_analytics.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
   </body>
 </html>

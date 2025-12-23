@@ -26,9 +26,25 @@ const handleSubmit = (e) => {
         const token = data.token;
 
         if (token) {
-          alert("successfull!");
-          localStorage.setItem("token", token);
+          Toastify({
+            text: "Successfull!",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #2faf08ff, #2faf08ff)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+          setTimeout(() => {
+            localStorage.setItem("token", token);
           window.location.href = "dashboard.html";
+          }, 1000);
+          
         }
       });
   }
