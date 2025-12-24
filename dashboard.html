@@ -57,53 +57,90 @@
       <!-- table -->
       <div class="an__wrapper an">
         <table class="an__table">
-          <thead class="an__table-head">
-            <tr class="an__table-row an__table-headRow">
-              <th class="an__table-height an__table-id">ID</th>
-              <th class="an__table-height">Title</th>
-              <th class="an__table-height">Category</th>
-              <th class="an__table-height">Price</th>
-              <th class="an__table-height">Image</th>
-              <th class="an__table-height">Action</th>
-            </tr>
-          </thead>
           <!-- ADD PRODUCTS -->
-          <section class="add-product add none">
-            <form class="add-form">
-              <input
-                class="add-input"
-                type="text"
-                placeholder="title"
-                name="title"
-              />
-              <input
-                class="add-input"
-                type="text"
-                placeholder="category"
-                name="category"
-              />
-              <input
-                class="add-input"
-                type="number"
-                placeholder="price"
-                name="price"
-              />
-              <input
-                class="add-input"
-                type="url"
-                placeholder="image"
-                name="image"
-              />
-            </form>
-            <div class="add-buttons">
-              <button class="add-button add-submit">Submit</button>
-              <button class="add-button add-cancel">Cancel</button>
+          <section class="add__wrapper none">
+            <div class="add-product add">
+              <form class="add-form">
+                <input
+                  class="add-input"
+                  type="text"
+                  placeholder="title"
+                  name="title"
+                />
+                <input
+                  class="add-input"
+                  type="text"
+                  placeholder="category"
+                  name="category"
+                />
+                <input
+                  class="add-input"
+                  type="number"
+                  placeholder="price"
+                  name="price"
+                />
+                <input
+                  class="add-input"
+                  type="url"
+                  placeholder="image"
+                  name="image"
+                />
+              </form>
+              <div class="add-buttons">
+                <button class="add-button add-submit">Submit</button>
+                <button class="add-button add-cancel">Cancel</button>
+              </div>
             </div>
           </section>
-          <button class="add-closer">+</button>
+          <div class="add__button-wrapper">
+            <button class="add-closer">+</button>
+          </div>
+
           <!-- THE END OF ADDING PART -->
+
           <tbody class="an__table-body"></tbody>
         </table>
+        <!-- EDITING PART -->
+        <section class="edit__wrapper edit__none">
+          <div class="edit">
+            <form class="edit__form">
+              <input
+                value=""
+                placeholder="title"
+                type="text"
+                name="title"
+                class="edit__input"
+              />
+              <input
+                value=""
+                placeholder="category"
+                type="text"
+                name="category"
+                class="edit__input"
+              />
+              <input
+                value=""
+                placeholder="price"
+                type="number"
+                name="price"
+                class="edit__input"
+              />
+              <input
+                value=""
+                placeholder="image"
+                type="text"
+                name="image"
+                class="edit__input"
+              />
+            </form>
+            <div class="edit__buttons">
+              <button class="edit__button edit__submit">Submit</button>
+              <button class="edit__button edit__cancel">Cancel</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- THE END OF EDITING PART -->
       </div>
       <div class="products__wrapper pro">
         <section class="pro__part1">

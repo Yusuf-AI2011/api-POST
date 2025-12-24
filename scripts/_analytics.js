@@ -19,7 +19,7 @@ function show(data) {
               <td class="an__table-description"><img class="an__image" src=${image} alt="img"></td>
               <td class="an__table-description">
                 <div class="an__table-buttons">
-                  <button class="an__table-button an__table-edit">Edit</button>
+                  <button class="an__table-button an__table-edit" onclick = "editFunction(${id})">Edit</button>
                   <button class="an__table-button an__table-delete" onclick = "deleteFunction(${id})">Delete</button>
                 </div>
               </td>
@@ -51,37 +51,21 @@ buttonPro.addEventListener("click", () => {
   document.querySelector(".products__wrapper").style.cssText = "display: flex;";
 });
 
-// api delete
-
-const buttonDelete = document.querySelector(".an__table-delete");
-
-function deleteFunction(id) {
-  fetch(`https://fakestoreapi.com/products/${id}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data) {
-        document.querySelector(".an__table-description").parentElement.remove();
-      }
-    });
-}
-
 // add modal window (PRODUCTS)
 const addButton = document.querySelector(".add-closer");
-const addProduct = document.querySelector(".add-product");
+const addProduct = document.querySelector(".add__wrapper");
 const addCancel = document.querySelector(".add-cancel");
 const addSubmit = document.querySelector(".add-submit");
 const addForm = document.querySelector(".add-form");
 
 addButton.addEventListener("click", () => {
   // e.preventDefault();
-  addProduct.classList.toggle("none");
+  addProduct.classList.remove("none");
 });
 
 addCancel.addEventListener("click", () => {
   // e.preventDefault();
-  addProduct.classList.toggle("none");
+  addProduct.classList.add("none");
 });
 
 addSubmit.addEventListener("click", (e) => {
@@ -122,17 +106,38 @@ addSubmit.addEventListener("click", (e) => {
           onClick: function () {}, // Callback after click
         }).showToast();
       } else {
+        addForm["title"].value = "";
+        addForm["category"].value = "";
+        addForm["price"].value = "";
+        addForm["image"].value = "";
+        addProduct.classList.add("none");
+
+        Toastify({
+          text: "Succesfull!",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #2faf08ff, #2faf08ff)",
+          },
+          onClick: function () {}, // Callback after click
+        }).showToast();
+
         wrapper.innerHTML += `
             <tr class="an__table-row">
               <td class="an__table-description an__table-id">${data.id}</td>
-              <td class="an__table-description">${data.title}</td>
-              <td class="an__table-description">${data.category}</td>
+              <td class="an__table-description an__table-title">${data.title}</td>
+              <td class="an__table-description an__table-category">${data.category}</td>
              
-              <td class="an__table-description">${data.price}$</td>
-              <td class="an__table-description"><img class="an__image" src=${data.image} alt="img"></td>
+              <td class="an__table-description an__table-price">${data.price}$</td>
+              <td class="an__table-description an__table-image"><img class="an__image" src=${data.image} alt="img"></td>
               <td class="an__table-description">
                 <div class="an__table-buttons">
-                  <button class="an__table-button an__table-edit">Edit</button>
+                  <button class="an__table-button an__table-edit" onclick = "editFunction()">Edit</button>
                   <button class="an__table-button an__table-delete" onclick = "deleteFunction()">Delete</button>
                 </div>
               </td>
@@ -141,3 +146,70 @@ addSubmit.addEventListener("click", (e) => {
       }
     });
 });
+
+// api delete
+
+const buttonDelete = document.querySelector(".an__table-delete");
+
+function deleteFunction(id) {
+  fetch(`https://fakestoreapi.com/products/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data) {
+        document.querySelectorAll(".an__table-row")[id].style.cssText =
+          "display: none;";
+      }
+    });
+}
+
+// PUT modal window
+
+const edit = document.querySelector(".edit__wrapper");
+const editForm = document.querySelector(".edit__form");
+const editButton = document.querySelector(".an__table-edit");
+const editCancel = document.querySelector(".edit__cancel");
+const editSubmit = document.querySelector(".edit__submit");
+
+editCancel.addEventListener("click", () => {
+  edit.classList.add("edit__none");
+});
+
+function editFunction(id) {
+  edit.classList.remove("edit__none");
+  const which = id;
+  console.log("ID = " + which);
+
+  fetch(`https://fakestoreapi.com/products/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const eachData = data[which];
+      editForm["title"].value = data.title;
+      editForm["category"].value = data.category;
+      editForm["price"].value = data.price;
+      editForm["image"].value = data.image;
+
+      editSubmit.onclick = (e) => {
+        e.preventDefault();
+        const productsForPut = {
+          title: editForm["title"].value,
+          category: editForm["category"].value,
+          price: editForm["price"].value,
+          image: editForm["image"].value,
+        };
+
+        fetch(`https://fakestoreapi.com/products/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(productsForPut),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("something");
+            
+            edit.classList.add("edit__none");
+          });
+      };
+    });
+}
