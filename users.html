@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/fonts.css" />
+    <link rel="stylesheet" href="styles/normolize.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
+  <body>
+    <header class="head">
+      <section class="head__up">
+        <article class="head__profile">
+          <aside class="head__logo">
+            <svg
+              class="head__icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM6.02332 15.4163C7.49083 17.6069 9.69511 19 12.1597 19C14.6243 19 16.8286 17.6069 18.2961 15.4163C16.6885 13.9172 14.5312 13 12.1597 13C9.78821 13 7.63095 13.9172 6.02332 15.4163ZM12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z"
+              ></path>
+            </svg>
+          </aside>
+          <h1 class="head__name">User</h1>
+        </article>
+      </section>
+
+      <section class="head__center">
+        <article class="head__cards">
+          <button class="head__card">Home</button>
+          <button class="head__card head__buttonPro">Products</button>
+          <button class="head__card">Users</button>
+          <button class="head__card head__buttonAn">Analytics</button>
+          <button class="head__card">Settings</button>
+        </article>
+      </section>
+      <section class="head__down">
+        <article class="head__buttons">
+          <button class="head__button">Log Out</button>
+        </article>
+      </section>
+    </header>
+
+    <main class="main">
+      <nav class="nav">
+        <h1 class="main__title">Dashboard</h1>
+      </nav>
+
+      <section class="user__wrapper">
+        <div class="user">
+          <div class="user__up">
+            <div class="user__up-left">
+              <h1 class="user__title">Manage Users</h1>
+              <p class="user__download">
+                <span class="user__user-download">100</span> users
+              </p>
+            </div>
+            <div class="user__up-right"></div>
+          </div>
+          <div class="user__down">
+            <div class="user__down-left">
+                <div class="user__cards-title">
+                    <div class="user__card">
+                        <p class="user__username">Username</p>
+                        <div class="user__boxes">
+                            <div class="user__box">
+                                <p class="user__email">Email</p>
+                            </div>
+                            <div class="user__box">
+                                <p class="user__phone">Phone</p>
+                            </div>
+                            <div class="user__box">
+                                <p class="user__passowrd">Password</p>
+                            </div>
+                            <div class="user__box">
+                                <p class="user__name">Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <div class="user__cards">
+                
+                </div>
+              </div>
+            </div>
+            <div class="user__down-right"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="scripts/_users.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+  </body>
+</html>
