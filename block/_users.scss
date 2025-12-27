@@ -8,7 +8,7 @@
   gap: 50px;
 
   &__up {
-    width: 1320px;
+    width: 1500px;
     height: 100px;
     // border: 2px solid blue;
     display: flex;
@@ -58,6 +58,10 @@
     border: 2px solid red;
     color: #fff;
     background-color: #202020;
+  }
+
+  &__search::placeholder {
+    color: #fff;
   }
 
   input[type="search"]::-webkit-search-cancel-button {
@@ -132,11 +136,202 @@
   }
 
   &__box {
-    width: 250px;
+    width: 200px;
     // border: 1px solid purple;
   }
 
   &__name {
     text-transform: capitalize;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__button {
+    width: 70px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: 2px solid red;
+    border-radius: 10px;
+    background-color: #202020;
+  }
+}
+
+.modal {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #202020;
+  border-radius: 10px;
+
+  &__text {
+    font-weight: 900;
+    color: #ff000f;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    // border: 2px solid red;
+  }
+  &__wrapper {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    // border: 2px solid blue;
+    background-color: rgba(#000, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__input {
+    width: 90%;
+    height: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    // border: 2px solid purple;
+
+    ::placeholder {
+        color: #202020;
+    }
+  }
+
+  &__buttons {
+    width: 100%;
+    padding: 0px 10px;
+    // border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__button {
+    width: 100px;
+    height: 30px;
+    font-weight: 900;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  &__submit {
+    background-color: green;
+  }
+
+  &__cancel {
+    background-color: red;
+  }
+}
+
+.none {
+  display: none;
+}
+
+.edit {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #202020;
+  border-radius: 10px;
+
+  &__text {
+    font-weight: 900;
+    color: #ff000f;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    // border: 2px solid red;
+  }
+  &__Wrapper {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    // border: 2px solid blue;
+    background-color: rgba(#000, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__input {
+    width: 90%;
+    height: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    // border: 2px solid purple;
+
+    ::placeholder {
+        color: #202020;
+    }
+  }
+
+  &__buttons {
+    width: 100%;
+    padding: 0px 10px;
+    // border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__button {
+    width: 100px;
+    height: 30px;
+    font-weight: 900;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  &__submit {
+    background-color: green;
+  }
+
+  &__cancel {
+    background-color: red;
+  }
+
+  &__name {
+    text-transform: capitalize;
+  }
+
+  &__none {
+    display: none;
   }
 }
