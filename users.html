@@ -53,9 +53,93 @@
       <nav class="nav">
         <h1 class="main__title">Dashboard</h1>
       </nav>
-
       <section class="user__wrapper">
         <div class="user">
+          <div class="modal__wrapper none">
+            <div class="modal">
+              <form class="modal__form">
+                <p class="modal__text">Add the item</p>
+                <input
+                  placeholder="username"
+                  name="username"
+                  type="text"
+                  class="modal__input"
+                />
+                <input
+                  placeholder="email"
+                  name="email"
+                  type="email"
+                  class="modal__input"
+                />
+                <input
+                  placeholder="phone"
+                  name="phone"
+                  type="text"
+                  class="modal__input"
+                />
+                <input
+                  placeholder="password"
+                  name="password"
+                  type="text"
+                  class="modal__input"
+                />
+                <input
+                  placeholder="name"
+                  name="name"
+                  type="text"
+                  class="modal__input"
+                />
+              </form>
+              <div class="modal__buttons">
+                <button class="modal__button modal__submit">Submit</button>
+                <button class="modal__button modal__cancel">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="edit__Wrapper edit__none">
+            <div class="edit">
+              <form class="edit__form">
+                <p class="edit__text">Edit the item</p>
+                <input
+                  placeholder="username"
+                  name="username"
+                  type="text"
+                  class="edit__input"
+                />
+                <input
+                  placeholder="email"
+                  name="email"
+                  type="email"
+                  class="edit__input"
+                />
+                <input
+                  placeholder="phone"
+                  name="phone"
+                  type="number"
+                  class="edit__input"
+                />
+                <input
+                  placeholder="password"
+                  name="password"
+                  type="text"
+                  class="edit__input"
+                />
+                <input
+                  placeholder="name"
+                  name="name"
+                  type="text"
+                  class="edit__input edit__name"
+                />
+              </form>
+              <div class="edit__buttons">
+                <button class="edit__button edit__submit">Submit</button>
+                <button class="edit__button edit__cancel">Cancel</button>
+              </div>
+            </div>
+            
+          </div>
+
           <div class="user__up">
             <div class="user__up-left">
               <h1 class="user__title">Manage Users</h1>
@@ -64,15 +148,17 @@
               </p>
             </div>
             <div class="user__up-right">
-              <input type="search" class="user__search">
-              <input type="button" value="+" class="user__add-button">
+              <input type="search" class="user__search" placeholder="Search" />
+              <input type="button" value="+" class="user__add-button" />
             </div>
           </div>
           <div class="user__down">
             <div class="user__down-left">
               <div class="user__cards-title">
                 <div class="user__card user__card-title">
-                  <p class="user__username">Username</p>
+                  <div class="user__box">
+                    <p class="user__username">Username</p>
+                  </div>
                   <div class="user__boxes">
                     <div class="user__box">
                       <p class="user__email">Email</p>
@@ -85,6 +171,9 @@
                     </div>
                     <div class="user__box">
                       <p class="user__name">Name</p>
+                    </div>
+                    <div class="user__box">
+                      <p class="user__action">Action</p>
                     </div>
                   </div>
                 </div>
