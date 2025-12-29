@@ -45,7 +45,7 @@ function deleteFunction(id) {
     .then((res) => res.json())
     .then((data) => {
       console.log(id);
-
+      alert("Deleted!")
       document.querySelectorAll(".cart__cards")[id].remove();
     });
 }
