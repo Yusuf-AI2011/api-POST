@@ -40,7 +40,9 @@
           <button class="head__card">Users</button>
           <button class="head__card head__buttonAn">Analytics</button>
           <button class="head__card">Settings</button>
-          <a href="carts.html"><button class="head__card">Carts</button></a>
+=======
+          <button class="head__card">Carts</button>
+>>>>>>> carts
         </article>
       </section>
       <section class="head__down">
@@ -50,12 +52,61 @@
       </section>
     </header>
 
+
     <main class="main">
       <nav class="nav">
         <h1 class="main__title">Dashboard</h1>
       </nav>
-
-      
+      <div class="cart__wrapper">
+        <div class="cart">
+          <div class="cart__up">
+            <div class="cart__up-left">
+              <h1 class="cart__title">Manage Carts</h1>
+              <p class="cart__download">
+                <span class="cart__span-download">100</span> carts
+              </p>
+            </div>
+            <div class="cart__up-right"></div>
+          </div>
+          <div class="cart__down">
+            <div class="cart__down-left">
+              <div class="cart__title-cards cart__cards">
+                <div class="cart__title-card cart__card">
+                  <p class="cart__title-id cart__id">ID</p>
+                </div>
+                <div class="cart__title-card cart__card">
+                  <p class="cart__title-userid cart__userid">UserId</p>
+                </div>
+                <div class="cart__title-card cart__card">
+                  <p class="cart__title-date cart__date">Date</p>
+                </div>
+                <div class="cart__title-action-wrapper cart__card">
+                  <p class="cart__title-action">Actions</p>
+                </div>
+              </div>
+            </div>
+            <div class="cart__down-right">
+              <div class="cart__result-wrapper none">
+                <div class="cart__result">
+                  <div class="cart__products-wrapper">
+                    <div class="cart__products">
+                      <div class="cart__product">
+                        <!-- <p class="cart__product-id">Product's id: ${data.id}</p>
+                        <p class="cart__product-quan"><img src="data.image" alt="img" class="cart__product-img"></p>
+                        <p class="cart__product-price">Price: ${data.price}</p>
+                        <p class="cart__product-quan">Quantity: ${item.quantity}</p>
+                        <p class="cart__product-summaPrice">Summarized price: ${summaPrice}</p> -->
+                        <button class="cart__product-close">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+>>>>>>> carts
     </main>
     <script src="scripts/_carts.js"></script>
     <script
