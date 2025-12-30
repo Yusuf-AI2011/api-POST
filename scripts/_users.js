@@ -12,7 +12,7 @@ request.open("GET", "https://fakestoreapi.com/users");
 request.send();
 
 function getFunction(data) {
-  // console.log(data);
+  console.log(data);
   data.map(({ address, email, id, password, name, phone, username }, index) => {
     userCards.innerHTML += `
         <div class="user__card">
@@ -41,6 +41,10 @@ function getFunction(data) {
                   </div>
         `;
   });
+
+  for (let i = 0; i < data.length; i++) {
+    localStorage.setItem(i, JSON.stringify(data[i].username));
+  }
 }
 
 // Add new user (POST)
@@ -233,3 +237,37 @@ function editFunction(id) {
   request.send();
   userCards.innerHTML = "";
 }
+
+// search part
+const searchInput = document.querySelector(".user__search");
+searchInput.addEventListener("input", (letter) => {
+  if (!(searchInput.value == "")) {
+    fetch(`https://fakestoreapi.com/users`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        data.map((item, index) => {
+          // console.log(item.username);
+          let spell = item.username.split("");
+          // console.log(spell);
+
+          spell.map((item2, index) => {
+            if (letter.target.value.toLowerCase() == item2) {
+              for (let i = 0; i < data.length; i++) {
+                document.querySelectorAll(".user__username")[i].value =
+                  JSON.parse(localStorage.getItem(i));
+                let usernameValue =
+                  document.querySelectorAll(".user__username")[i];
+
+                usernameValue.value.split("").map((item, index) => {
+                  if (letter.target.value.toLowerCase() == item) {
+                    usernameValue.style.cssText = "color: yellow";
+                  }
+                });
+              }
+            }
+          });
+        });
+      });
+  }
+});

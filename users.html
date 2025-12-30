@@ -36,11 +36,14 @@
       <section class="head__center">
         <article class="head__cards">
           <button class="head__card">Home</button>
-          <button class="head__card head__buttonPro">Products</button>
+          <a href="dashboard.html"
+            ><button class="head__card head__buttonPro">Products</button></a
+          >
           <button class="head__card">Users</button>
           <button class="head__card head__buttonAn">Analytics</button>
           <button class="head__card">Settings</button>
           <button class="head__card">Carts</button>
+          <a href="carts.html"><button class="head__card">Carts</button></a>
         </article>
       </section>
       <section class="head__down">
@@ -138,7 +141,6 @@
                 <button class="edit__button edit__cancel">Cancel</button>
               </div>
             </div>
-            
           </div>
 
           <div class="user__up">
@@ -158,7 +160,7 @@
               <div class="user__cards-title">
                 <div class="user__card user__card-title">
                   <div class="user__box">
-                    <p class="user__username">Username</p>
+                    <p style="color: #fff" class="user__username1">Username</p>
                   </div>
                   <div class="user__boxes">
                     <div class="user__box">
@@ -187,6 +189,7 @@
       </section>
     </main>
     <script src="scripts/_users.js"></script>
+    <script src="scripts/_dashboard.js"></script>
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/toastify-js"

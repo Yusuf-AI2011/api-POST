@@ -7,9 +7,9 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
-  background-color: rgba(88, 50, 140, 1);
+  background-color: #202020;
+  border: 2px solid red;
   border-radius: 10px;
-  box-shadow: 0 0px 10px 0 rgba(88, 50, 140, 1);
 
   &__card {
     width: 95%;
@@ -30,6 +30,9 @@
     outline: none;
     color: #333333;
     border-radius: 5px;
+    color: red;
+    font-weight: 900;
+    border: 2px solid red;
   }
 
   &__button {
@@ -37,11 +40,11 @@
     height: 40px;
     margin: auto;
     outline: none;
-    background-color: green;
-    color: #ffffff;
+    background-color: #202020;
+    border: 2px solid red;
+    color: red;
     font-weight: 900;
     border-radius: 5px;
-    border: none;
   }
 
   &__button:active {
@@ -50,9 +53,14 @@
 
   &__text {
     color: rgba(245, 240, 255, 1);
+    color: red;
+    font-weight: 900;
   }
 
   a {
     margin: auto;
   }
+}
+body {
+  background-color: rgba(0, 0, 0, 0.9);
 }
