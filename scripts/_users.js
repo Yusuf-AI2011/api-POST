@@ -239,6 +239,7 @@ function editFunction(id) {
 }
 
 // search part
+alert("something");
 const searchInput = document.querySelector(".user__search");
 searchInput.addEventListener("input", (letter) => {
   if (!(searchInput.value == "")) {
@@ -262,6 +263,10 @@ searchInput.addEventListener("input", (letter) => {
                 usernameValue.value.split("").map((item, index) => {
                   if (letter.target.value.toLowerCase() == item) {
                     usernameValue.style.cssText = "color: yellow";
+                  } else if ((searchInput.value == "")) {
+                    for (let i = 0; i < data.length; i++) {
+                      usernameValue.style.cssText = "color: #fff";
+                    }
                   }
                 });
               }
