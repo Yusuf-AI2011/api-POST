@@ -239,7 +239,6 @@ function editFunction(id) {
 }
 
 // search part
-alert("something");
 const searchInput = document.querySelector(".user__search");
 searchInput.addEventListener("input", (letter) => {
   if (!(searchInput.value == "")) {
