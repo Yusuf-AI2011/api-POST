@@ -12,7 +12,7 @@ request.open("GET", "https://fakestoreapi.com/users");
 request.send();
 
 function getFunction(data) {
-  console.log(data);
+  // console.log(data);
   data.map(({ address, email, id, password, name, phone, username }, index) => {
     userCards.innerHTML += `
         <div class="user__card">
@@ -24,7 +24,7 @@ function getFunction(data) {
                       <p class="user__email">${email}</p>
                     </div>
                     <div class="user__box">
-                      <p class="user__phone">${phone}</p>
+                      <p class="user__phone">${phone.replaceAll("-", "")}</p>
                     </div>
                     <div class="user__box">
                       <p class="user__password">${password}</p>
@@ -116,7 +116,10 @@ submitButton.addEventListener("click", (e) => {
                       <p class="user__email">${newUser.email}</p>
                     </div>
                     <div class="user__box">
-                      <p class="user__phone">${newUser.phone}</p>
+                      <p class="user__phone">${newUser.phone.replaceAll(
+                        "-",
+                        ""
+                      )}</p>
                     </div>
                     <div class="user__box">
                       <p class="user__password">${newUser.password}</p>
@@ -159,83 +162,42 @@ editCancel.addEventListener("click", () => {
 
 function editFunction(id) {
   editWrapper.classList.remove("edit__none");
+  id = id - 1;
 
-  request.addEventListener("readystatechange", () => {
-    if (request.readyState === 4) {
-      const data = JSON.parse(request.responseText);
-      console.log(data[id - 1]);
+  fetch(`https://fakestoreapi.com/users`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data[id]);
+      editForm["username"].value = data[id].username;
+      editForm["email"].value = data[id].email;
+      editForm["phone"].value = data[id].phone.replaceAll("-", "");
+      editForm["password"].value = data[id].password;
+      editForm["name"].value = data[id].name.firstname;
+    });
 
-      const which = id - 1;
-      // console.log(data[id - 1]);
-      editForm["username"].value = data[id - 1].username;
-      editForm["email"].value = data[id - 1].email;
-      editForm["phone"].value = data[id - 1].phone.replaceAll("-", "");
-      editForm["password"].value = data[id - 1].password;
-      editForm["name"].value = data[id - 1].name.firstname;
+  editSubmit.onclick = (e) => {
+    e.preventDefault();
+    editWrapper.classList.add("edit__none");
 
-      const username = editForm["username"].value;
-      const email = editForm["email"].value;
-      const phone = editForm["phone"].value;
-      const password = editForm["password"].value;
-      const name = editForm["name"].value;
+    const username = editForm["username"].value;
+    const email = editForm["email"].value;
+    const phone = editForm["phone"].value;
+    const password = editForm["password"].value;
+    const name = editForm["name"].value;
 
-      const editUser = {
-        username,
-        email,
-        phone,
-        password,
-        name,
-      };
+    document.querySelectorAll(".user__username")[id].innerHTML = `${username}`;
+    document.querySelectorAll(".user__email")[id].innerHTML = `${email}`;
+    document.querySelectorAll(".user__phone")[id].innerHTML = `${phone}`;
+    document.querySelectorAll(".user__password")[id].innerHTML = `${password}`;
+    document.querySelectorAll(".user__name")[id].innerHTML = `${name}`;
 
-      fetch(`https://fakestoreapi.com/users/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editUser),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          editSubmit.addEventListener("click", () => {
-            editWrapper.classList.add("edit__none");
-
-            console.log(editForm["username"].value);
-            console.log(
-              document.querySelectorAll(".user__username")[which].value
-            );
-
-            const userCards = document.querySelectorAll(".user__cards")[id - 1];
-
-            userCards.innerHTML += `
-        <div class="user__card">
-                  <div class="user__box">
-                    <p class="user__username">${editForm["username"].value}</p>
-                  </div>                  
-                  <div class="user__boxes">
-                    <div class="user__box">
-                      <p class="user__email">${newUser.email}</p>
-                    </div>
-                    <div class="user__box">
-                      <p class="user__phone">${newUser.phone}</p>
-                    </div>
-                    <div class="user__box">
-                      <p class="user__password">${newUser.password}</p>
-                    </div>
-                    <div class="user__box">
-                      <p class="user__name">${newUser.name}</p>
-                    </div>
-                    <div class="user__box">
-                      <div class="user__buttons">
-                        <button class="user__button user__edit">Edit</button>
-                        <button class="user__button user__delete ">Delete</button>
-                    </div>
-                  </div>
-        `;
-          });
-        });
-    }
-  });
-  request.open("GET", `https://fakestoreapi.com/users`);
-  request.send();
-  userCards.innerHTML = "";
+    
+    document.querySelectorAll(".user__username")[id].value = `${username}`;
+    document.querySelectorAll(".user__email")[id].value = `${email}`;
+    document.querySelectorAll(".user__phone")[id].value = `${phone}`;
+    document.querySelectorAll(".user__password")[id].value = `${password}`;
+    document.querySelectorAll(".user__name")[id].value = `${name}`;
+  };
 }
 
 // search part
@@ -262,7 +224,7 @@ searchInput.addEventListener("input", (letter) => {
                 usernameValue.value.split("").map((item, index) => {
                   if (letter.target.value.toLowerCase() == item) {
                     usernameValue.style.cssText = "color: yellow";
-                  } else if ((searchInput.value == "")) {
+                  } else if (searchInput.value == "") {
                     for (let i = 0; i < data.length; i++) {
                       usernameValue.style.cssText = "color: #fff";
                     }
