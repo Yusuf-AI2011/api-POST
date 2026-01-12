@@ -1,17 +1,16 @@
-const request = new XMLHttpRequest();
+const api = `https://fakestoreapi.com/carts`;
 const cartWrapper = document.querySelector(".cart__down-left");
-request.addEventListener("readystatechange", () => {
-  if (request.readyState === 4) {
-    const data = JSON.parse(request.responseText);
-    getFunction(data);
-  }
-});
-function getFunction(data) {
-  // console.log(data);
 
-  data.map(({ id, userId, date, product }, index) => {
-    cartWrapper.innerHTML += `
-    
+try {
+  const getData = async (url) => {
+    const request = await axios.get(url);
+    console.log(request.data);
+
+    getFunction(request.data);
+    function getFunction(data) {
+      data.map(({ id, userId, date }, index) => {
+        cartWrapper.innerHTML += `
+
             <div class="cart__cards">
                 <div class="cart__card">
                   <p class="cart__id">${id}</p>
@@ -31,23 +30,27 @@ function getFunction(data) {
               </div>
 
     `;
-  });
+      });
+    }
+  };
+  getData(api);
+} catch (error) {
+  throw new Error(error);
 }
-request.open("GET", "https://fakestoreapi.com/carts");
-request.send();
 
 // carts delete (DELETE)
 function deleteFunction(id) {
   resultWrapper.classList.add("none");
-  fetch(`https://fakestoreapi.com/carts/${id}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .then((data) => {
+
+  try {
+    axios.delete(`https://fakestoreapi.com/carts/${id}`).then((data) => {
       console.log(id);
-      alert("Deleted!")
+      alert("Deleted!");
       document.querySelectorAll(".cart__cards")[id].remove();
     });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 const viewButton = document.querySelector(".cart__view");
@@ -58,34 +61,34 @@ function viewFunction(id) {
   resultWrapper.classList.remove("none");
   resultCard.innerHTML = "";
   let summaPrice = 0;
-  fetch(`https://fakestoreapi.com/carts/${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      // console.log(data);
 
+  try {
+    axios.get(`https://fakestoreapi.com/carts/${id}`).then((data) => {
       console.log(data.products);
-      let countProduct = data.products.length;
+      let countProduct = data.data.products.length;
       console.log("How many products = " + countProduct);
 
-      data.products.map((item, index) => {
+      data.data.products.map((item, index) => {
         console.log("Which product = " + item.productId);
 
-        fetch(`https://fakestoreapi.com/products/${item.productId}`)
-          .then((resGetProducts) => resGetProducts.json())
-          .then((data) => {
-            console.log(
-              "Summarized only product's price: " + data.price * item.quantity
-            );
-            summaPrice += data.price * item.quantity;
-            console.log("Summarized price of all products: " + summaPrice);
-            resultCard.innerHTML += `
+        try {
+          axios
+            .get(`https://fakestoreapi.com/products/${item.productId}`)
+            .then((data) => {
+              console.log(
+                "Summarized only product's price: " +
+                  data.data.price * item.quantity
+              );
+              summaPrice += data.data.price * item.quantity;
+              console.log("Summarized price of all products: " + summaPrice);
+              resultCard.innerHTML += `
               <div class="cart__product-boxes">
                 <div class="cart__product-box cart__product-box1">
-                  <p class="cart__product-id">Product's id: ${data.id}</p>
-                  <p class="cart__product-imageWrapper"><img src=${data.image} alt="img" class="cart__product-image"></p>
+                  <p class="cart__product-id">Product's id: ${data.data.id}</p>
+                  <p class="cart__product-imageWrapper"><img src=${data.data.image} alt="img" class="cart__product-image"></p>
                 </div>
                 <div class="cart__product-box cart__product-box2">
-                  <p class="cart__product-price">Price: ${data.price}$</p>
+                  <p class="cart__product-price">Price: ${data.data.price}$</p>
                   <p class="cart__product-quan">Quantity: ${item.quantity}</p>
                   <p class="cart__product-summaPrice">Summarized price: ${summaPrice}$</p>
                   
@@ -93,8 +96,13 @@ function viewFunction(id) {
                 </div>
               </div>              
               `;
-          });
+            });
+        } catch (error) {
+          throw new Error(error);
+        }
       });
     });
-    
+  } catch (error) {
+    throw new Error(error);
+  }
 }

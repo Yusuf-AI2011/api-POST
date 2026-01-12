@@ -1,34 +1,35 @@
-const request = new XMLHttpRequest();
-const wrapper = document.querySelector(".an__table-body");
-request.addEventListener("readystatechange", () => {
-  if (request.readyState === 4) {
-    const data = JSON.parse(request.responseText);
-    // console.log(data);
-    show(data);
-  }
-});
-function show(data) {
-  data.map(({ id, title, category, price, image }, index) => {
-    wrapper.innerHTML += `
-            <tr class="an__table-row">
-              <td class="an__table-description an__table-id">${id}</td>
-              <td class="an__table-description">${title}</td>
-              <td class="an__table-description">${category}</td>
-             
-              <td class="an__table-description">${price}$</td>
-              <td class="an__table-description"><img class="an__image" src=${image} alt="img"></td>
-              <td class="an__table-description">
-                <div class="an__table-buttons">
-                  <button class="an__table-button an__table-edit" onclick = "editFunction(${id})">Edit</button>
-                  <button class="an__table-button an__table-delete" onclick = "deleteFunction(${id})">Delete</button>
-                </div>
-              </td>
-            </tr>
+const api = `https://fakestoreapi.com/products`;
+const tableBody = document.querySelector(".an__table-body");
+try {
+  const getData = async (url) => {
+    const request = await axios.get(url);
+
+    const getFunction = (data) => {
+      data.map(({ id, title, category, price, image }, index) => {
+        tableBody.innerHTML += `
+        <tr class="an__table-row">
+  <td class="an__table-description an__table-id">${id}</td>
+  <td class="an__table-description an__table-title">${title}</td>
+  <td class="an__table-description an__table-category">${category}</td>
+
+  <td class="an__table-description an__table-price">${price}$</td>
+  <td class="an__table-description an__table-image"><img class="an__image" src=${image} alt="img"></td>
+  <td class="an__table-description">
+    <div class="an__table-buttons">
+      <button class="an__table-button an__table-edit" onclick = "editFunction(${id})">Edit</button>
+      <button class="an__table-button an__table-delete" onclick = "deleteFunction(${id})">Delete</button>
+    </div>
+  </td>
+</tr>
         `;
-  });
+      });
+    };
+    getFunction(request.data);
+  };
+  getData(api);
+} catch (error) {
+  throw new Error(error);
 }
-request.open("GET", "https://fakestoreapi.com/products");
-request.send();
 
 // add modal window (PRODUCTS)
 const addButton = document.querySelector(".add-closer");
@@ -38,15 +39,14 @@ const addSubmit = document.querySelector(".add-submit");
 const addForm = document.querySelector(".add-form");
 
 addButton.addEventListener("click", () => {
-  // e.preventDefault();
   addProduct.classList.remove("none");
 });
 
 addCancel.addEventListener("click", () => {
-  // e.preventDefault();
   addProduct.classList.add("none");
 });
 
+// POST new product
 addSubmit.addEventListener("click", (e) => {
   e.preventDefault();
   const title = addForm["title"].value.trim();
@@ -61,69 +61,34 @@ addSubmit.addEventListener("click", (e) => {
     image,
   };
 
-  // POST new product
-  fetch("https://fakestoreapi.com/products", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(product),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (!(data.id && data.title && data.category && data.image)) {
-        Toastify({
-          text: "Fill all them!",
-          duration: 3000,
-          destination: "https://github.com/apvarun/toastify-js",
-          newWindow: true,
-          close: true,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-            background: "linear-gradient(to right, rgba(255, 0, 0, 1))",
-          },
-          onClick: function () {}, // Callback after click
-        }).showToast();
-      } else {
-        addForm["title"].value = "";
-        addForm["category"].value = "";
-        addForm["price"].value = "";
-        addForm["image"].value = "";
-        addProduct.classList.add("none");
+  try {
+    const postFunction = (url) => {
+      axios.post(url, product).then((data) => {
+        console.log(data.data);
 
-        Toastify({
-          text: "Succesfull!",
-          duration: 3000,
-          destination: "https://github.com/apvarun/toastify-js",
-          newWindow: true,
-          close: true,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-            background: "linear-gradient(to right, #2faf08ff, #2faf08ff)",
-          },
-          onClick: function () {}, // Callback after click
-        }).showToast();
+        tableBody.innerHTML += `
+        <tr class="an__table-row">
+  <td class="an__table-description an__table-id">${data.data.id}</td>
+  <td class="an__table-description an__table-title">${data.data.title}</td>
+  <td class="an__table-description an__table-category">${data.data.category}</td>
 
-        wrapper.innerHTML += `
-            <tr class="an__table-row">
-              <td class="an__table-description an__table-id">${data.id}</td>
-              <td class="an__table-description an__table-title">${data.title}</td>
-              <td class="an__table-description an__table-category">${data.category}</td>
-             
-              <td class="an__table-description an__table-price">${data.price}$</td>
-              <td class="an__table-description an__table-image"><img class="an__image" src=${data.image} alt="img"></td>
-              <td class="an__table-description">
-                <div class="an__table-buttons">
-                  <button class="an__table-button an__table-edit" onclick = "editFunction()">Edit</button>
-                  <button class="an__table-button an__table-delete" onclick = "deleteFunction()">Delete</button>
-                </div>
-              </td>
-            </tr>
+  <td class="an__table-description an__table-price">${data.data.price}$</td>
+  <td class="an__table-description an__table-image"><img class="an__image" src=${data.data.image} alt="img"></td>
+  <td class="an__table-description">
+    <div class="an__table-buttons">
+      <button class="an__table-button an__table-edit" onclick = "editFunction()">Edit</button>
+      <button class="an__table-button an__table-delete" onclick = "deleteFunction()">Delete</button>
+    </div>
+  </td>
+</tr>
         `;
-      }
-    });
+      });
+    };
+    postFunction(api);
+  } catch (error) {
+    throw new Error(error);
+  }
+  addProduct.classList.add("none");
 });
 
 // api delete
@@ -131,16 +96,19 @@ addSubmit.addEventListener("click", (e) => {
 const buttonDelete = document.querySelector(".an__table-delete");
 
 function deleteFunction(id) {
-  fetch(`https://fakestoreapi.com/products/${id}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data) {
-        document.querySelectorAll(".an__table-row")[id].style.cssText =
-          "display: none;";
-      }
-    });
+  try {
+    const deleteData = (url) => {
+      axios.delete(`https://fakestoreapi.com/products/${id}`).then((data) => {
+        if (data) {
+          document.querySelectorAll(".an__table-row")[id - 1].style.cssText =
+            "display: none;";
+        }
+      });
+    };
+    deleteData(api);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 // PUT modal window
@@ -157,38 +125,43 @@ editCancel.addEventListener("click", () => {
 
 function editFunction(id) {
   edit.classList.remove("edit__none");
-  const which = id;
-  console.log("ID = " + which);
+  console.log("ID = " + id);
 
-  fetch(`https://fakestoreapi.com/products/${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const eachData = data[which];
-      editForm["title"].value = data.title;
-      editForm["category"].value = data.category;
-      editForm["price"].value = data.price;
-      editForm["image"].value = data.image;
+  try {
+    const editData = (url) => {
+      axios.get(`https://fakestoreapi.com/products/${id}`).then((data) => {
+        editForm["title"].value = data.data.title;
+        editForm["category"].value = data.data.category;
+        editForm["price"].value = data.data.price;
+        editForm["image"].value = data.data.image;
 
-      editSubmit.onclick = (e) => {
-        e.preventDefault();
-        const productsForPut = {
-          title: editForm["title"].value,
-          category: editForm["category"].value,
-          price: editForm["price"].value,
-          image: editForm["image"].value,
+        editSubmit.onclick = (e) => {
+          e.preventDefault();
+          const productsForPut = {
+            title: editForm["title"].value,
+            category: editForm["category"].value,
+            price: editForm["price"].value,
+            image: editForm["image"].value,
+          };
+
+          const tableTitle = document.querySelectorAll(".an__table-title");
+          const tableCategory = document.querySelectorAll(
+            ".an__table-category"
+          );
+          const tablePrice = document.querySelectorAll(".an__table-price");
+          const tableImage = document.querySelectorAll(".an__table-image");
+
+          tableTitle[id - 1].innerHTML = productsForPut.title;
+          tableCategory[id - 1].innerHTML = productsForPut.category;
+          tablePrice[id - 1].innerHTML = productsForPut.price;
+          tableImage[id - 1].innerHTML = productsForPut.image;
+
+          edit.classList.toggle("edit__none");
         };
-
-        fetch(`https://fakestoreapi.com/products/${id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(productsForPut),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("something");
-            
-            edit.classList.add("edit__none");
-          });
-      };
-    });
+      });
+    };
+    editData(api);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
